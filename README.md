@@ -1,2 +1,3 @@
-# sentiment_paradise_lost
-Data visualization and sentiment analysis of Paradise Lost
+# Data Visualization and Sentiment Analysis of Paradise Lost 
+
+data data data
