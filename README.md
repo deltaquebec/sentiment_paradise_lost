@@ -1,4 +1,5 @@
 # Data Visualization and Sentiment Analysis of "*Paradise Lost*" by John Milton
-
-<div style="text-align: center"><img src="assets/dore_satan.jpg">
+<p align="center"> 
+<img src="/assets/dore_satan.jpg" alt="Satan by Dore" width="500" >
+</p>
 
