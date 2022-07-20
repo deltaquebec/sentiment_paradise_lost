@@ -52,3 +52,59 @@ chapter_name = ["~ BOOK I ~", "~ BOOK II ~", "~ BOOK III ~", "~ BOOK IV ~", "~ B
 pl_df_clean = pd.DataFrame(data=[k for k in chapters], columns=['text'])
 pl_df_clean = pl_df_clean.replace('\n',' ', regex=True)
 ```
+
+Milton's English is itself an exploration of th epoet's unique mastery of language. Haynes (2000), among others, notes the poet's use of multilingual assets such as syntax and vocabulary, with deliberate attention to the narrator's and the character's chosen rhetorical styles. His language is not Middle English, nor is it artificially archaicised like Spenser, nor is it exactly King James biblical style. T.S. Elliot remarks that "Milton writes English like a dead language". See [here](https://jonreeve.com/2016/07/paradise-lost-macroetymology/) for an etymological study of Milton's language.
+
+This has the interesting problem of how to clean the data for analysis. For this project, we clean the data according to English stopwords complemented with an additional series of stopwords with older English archaisms in _clean_stop.txt_. While not present in Milton's work, contractions are mapped to their periphrasis for good measure in _clean_map.txt_. The cleaning algorithm follows closely from [this work](https://github.com/072arushi/Movie_review_analysis). The cleaned text is saved to the dataframe.
+
+```
+# stopwords
+sw = nltk.corpus.stopwords.words('english')
+with open('clean_stop.txt','r') as f:
+    newStopWords = f.readlines()
+sw.extend(newStopWords)
+
+# contractions
+with open('clean_map.txt','r') as f:
+    mapping = f.readlines()
+
+# clean
+punct = string.punctuation
+def remove_punctuation(text):
+    return text.translate(str.maketrans('', '', punct))
+def clean_contractions(text, mapping):
+    specials = ["’", "‘", "´", "`"]
+    for s in specials:
+        text = text.replace(s, "'")
+    text = ' '.join([mapping[t] if t in mapping else t for t in text.split(" ")])
+    return text
+def remove_stopwords(text):
+    return " ".join([word for word in str(text).split() if word not in sw])
+def word_replace(text):
+    return text.replace('<br />','')
+stemmer = PorterStemmer()
+def stem_words(text):
+    return " ".join([stemmer.stem(word) for word in text.split()])
+lemmatizer = WordNetLemmatizer()
+def lemmatize_words(text):
+    return " ".join([lemmatizer.lemmatize(word) for word in text.split()])
+def remove_urls(text):
+    url_pattern = re.compile(r'https?://\S+|www\.\S+')
+    return url_pattern.sub(r'', text)
+def remove_html(text):
+    html_pattern = re.compile('<.*?>')
+    return html_pattern.sub(r'', text)
+def preprocess(text):
+    text=clean_contractions(text,mapping)
+    text=text.lower()
+    text=word_replace(text)
+    text=remove_urls(text)
+    text=remove_html(text)
+    text=remove_stopwords(text)
+    text=remove_punctuation(text)
+    text=lemmatize_words(text)
+    return text
+
+pl_df_clean['clean_text'] = pl_df_clean['text'].apply(lambda text: preprocess(text))
+pl_df_clean = pl_df_clean.replace('\n',' ', regex=True)
+```
