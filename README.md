@@ -1,3 +1,3 @@
-# Data Visualization and Sentiment Analysis of Paradise Lost 
+# Data Visualization and Sentiment Analysis of "*Paradise Lost*" by John Milton
 
-data data data
+<img src="assets/dore_satan.jpg" width="900" height="400">
