@@ -155,7 +155,7 @@ pl_df_clean = pd.merge(pl_df_clean, lex_dens_norm, left_index=True, right_index=
 pl_df_clean.to_csv(r'pl_df_clean.csv')
 ```
 
-For good measure, we also build a dataframe with a non-cleaned dataset. Here, we may include other details such as uppercase count, stopwords count, punctuation count, sentence count.
+For good measure, we also build a dataframe with a non-cleaned dataset. Here, we may include other details such as uppercase count, stopwords count, punctuation count, sentence count. Note that the lexical densities are still calculated raltive to the cleaned data.
 
 ```
 pl_df_raw = pd.DataFrame(data=[k for k in chapters], columns=['text'])
