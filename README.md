@@ -108,3 +108,12 @@ def preprocess(text):
 pl_df_clean['clean_text'] = pl_df_clean['text'].apply(lambda text: preprocess(text))
 pl_df_clean = pl_df_clean.replace('\n',' ', regex=True)
 ```
+
+Cleaned chapters are saved as a list such that they may be readily accessed.
+
+```
+chapters_clean = []
+for i in range(12):
+    chapters_clean.append(pl_df_clean.loc[i,'clean_text'])
+```
+
