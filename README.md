@@ -161,7 +161,7 @@ For good measure, we also build a dataframe with a non-cleaned dataset. Here, we
 pl_df_raw = pd.DataFrame(data=[k for k in chapters], columns=['text'])
 pl_df_raw = pl_df_raw.replace('\n',' ', regex=True)
 chapter_name = pd.DataFrame(chapter_name, columns=['chapter'])
-pl_df_clean = pd.merge(pl_df_clean, chapter_name, left_index=True, right_index=True)
+pl_df_raw = pd.merge(pl_df_raw, chapter_name, left_index=True, right_index=True)
 pl_df_raw['char_count']=pl_df_raw['text'].str.len()
 pl_df_raw['word_count']=pl_df_raw['text'].apply(lambda x: len(str(x).split()))
 pl_df_raw['unique_count']=pl_df_raw['text'].apply(lambda x: len(set(str(x).split())))
