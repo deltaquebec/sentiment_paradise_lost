@@ -174,3 +174,5 @@ pl_df_raw = pd.merge(pl_df_raw, lex_dens, left_index=True, right_index=True)
 pl_df_raw = pd.merge(pl_df_raw, lex_dens_norm, left_index=True, right_index=True)
 pl_df_raw.to_csv(r'pl_df_raw.csv')
 ```
+
+## Visualization
