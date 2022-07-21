@@ -48,9 +48,11 @@ readchap(path)
 chapter_name = ["~ BOOK I ~", "~ BOOK II ~", "~ BOOK III ~", "~ BOOK IV ~", "~ BOOK V ~", "~ BOOK VI ~",
             "~ BOOK VII ~", "~ BOOK VIII ~", "~ BOOK IX ~", "~ BOOK X ~", "~ BOOK XI ~", "~ BOOK XII ~"]
 
-# text
 pl_df_clean = pd.DataFrame(data=[k for k in chapters], columns=['text'])
 pl_df_clean = pl_df_clean.replace('\n',' ', regex=True)
+
+chapter_name = pd.DataFrame(chapter_name, columns=['chapter'])
+pl_df_clean = pd.merge(pl_df_clean, chapter_name, left_index=True, right_index=True)
 ```
 
 Milton's English is itself an exploration of th epoet's unique mastery of language. Haynes (2000), among others, notes the poet's use of multilingual assets such as syntax and vocabulary, with deliberate attention to the narrator's and the character's chosen rhetorical styles. His language is not Middle English, nor is it artificially archaicised like Spenser, nor is it exactly King James biblical style. T.S. Elliot remarks that "Milton writes English like a dead language". See [here](https://jonreeve.com/2016/07/paradise-lost-macroetymology/) for an etymological study of Milton's language.
@@ -117,3 +119,58 @@ for i in range(12):
     chapters_clean.append(pl_df_clean.loc[i,'clean_text'])
 ```
 
+Lexical densitity (or lexical diversity) is related as the lexical words (content words such as nouns, adjectives, adverbs, verbs) divided by the total number of words. This relationship indicates the content words per total in a text. This number can be normailzed by using the size of the smallest text (word count 2824 --- the length of the shortest chapter) instead of the true total. This allows for a scaled comparison.
+
+```
+def lexical_density(text):
+    return len(set(text)) / len(text)
+
+dens = []
+for i in chapters_clean:
+    tokens = RegexpTokenizer(r'\w+').tokenize(i)    
+    lex_dens = lexical_density(tokens)
+    dens.append(lex_dens)
+lex_dens = pd.DataFrame(dens) 
+lex_dens = lex_dens.rename(columns={0: 'lex_dens'})
+
+dens_norm = []
+for i in chapters_clean:
+    tokens = RegexpTokenizer(r'\w+').tokenize(i)
+    tokens = tokens[0:2824]     
+    lex_dens_norm = lexical_density(tokens)
+    dens_norm.append(lex_dens_norm)  
+lex_dens_norm = pd.DataFrame(dens_norm) 
+lex_dens_norm = lex_dens_norm.rename(columns={0: 'lex_dens_norm'})
+```
+
+We then compile this information into a dataframe that contains information such as: character count; word count; unique word count; average word length; lexical density; normalized lexical density. This is all saved to a .csv file such that we may analyze it at a later time.
+
+```
+pl_df_clean['char_count']=pl_df_clean['clean_text'].str.len()
+pl_df_clean['word_count']=pl_df_clean['clean_text'].apply(lambda x: len(str(x).split()))
+pl_df_clean['unique_count']=pl_df_clean['clean_text'].apply(lambda x: len(set(str(x).split())))
+pl_df_clean['avg_word_len']=pl_df_clean['clean_text'].apply(lambda x: np.mean([len(w) for w in str(x).split()]))
+pl_df_clean = pd.merge(pl_df_clean, lex_dens, left_index=True, right_index=True)
+pl_df_clean = pd.merge(pl_df_clean, lex_dens_norm, left_index=True, right_index=True)
+pl_df_clean.to_csv(r'pl_df_clean.csv')
+```
+
+For good measure, we also build a dataframe with a non-cleaned dataset. Here, we may include other details such as uppercase count, stopwords count, punctuation count, sentence count.
+
+```
+pl_df_raw = pd.DataFrame(data=[k for k in chapters], columns=['text'])
+pl_df_raw = pl_df_raw.replace('\n',' ', regex=True)
+chapter_name = pd.DataFrame(chapter_name, columns=['chapter'])
+pl_df_clean = pd.merge(pl_df_clean, chapter_name, left_index=True, right_index=True)
+pl_df_raw['char_count']=pl_df_raw['text'].str.len()
+pl_df_raw['word_count']=pl_df_raw['text'].apply(lambda x: len(str(x).split()))
+pl_df_raw['unique_count']=pl_df_raw['text'].apply(lambda x: len(set(str(x).split())))
+pl_df_raw['uppercase_count']=pl_df_raw['text'].apply(lambda x: len([w for w in str(x).split() if w.isupper()]))
+pl_df_raw['stopwords_count']=pl_df_raw['text'].apply(lambda x: len([w for w in str(x).lower().split() if w in sw]))
+pl_df_raw['avg_word_len']=pl_df_raw['text'].apply(lambda x: np.mean([len(w) for w in str(x).split()]))
+pl_df_raw['punct_count']=pl_df_raw['text'].apply(lambda x: len([c for c in str(x) if c in string.punctuation]))
+pl_df_raw['sent_count']=pl_df_raw['text'].apply(lambda x: len(re.findall(r"[?!.]",str(x)))+1)
+pl_df_raw = pd.merge(pl_df_raw, lex_dens, left_index=True, right_index=True)
+pl_df_raw = pd.merge(pl_df_raw, lex_dens_norm, left_index=True, right_index=True)
+pl_df_raw.to_csv(r'pl_df_raw.csv')
+```
