@@ -23,9 +23,13 @@ It should be noted that this project was conducted using the [CUDA Toolkit](http
 
 # 1. Visualization
 
-The tasks of data visualization are contained in a two python files: _dataframe_data.py_ and _visualization_data.py_. The plots of distributions are saved as .png files.
+The tasks of data visualization are contained in _visualization_data.py_ and _visualization_sent.py_. The plots of distributions are saved as .png files.
 
 ## Data preparation and data cleaning
+
+Data preparation follows from processing the text as well as preparing dataframes of numerical information as well as sentiment information. We prepare the data in _dataframe_data.py_ and the sentiment in _dataframe_sent.py_.
+
+### Textual Data
 
 A searchable etext of _Paradise Lost_ is available [here](https://www.paradiselost.org/8-search.html). This text was prepared with modernized spellings of Milton's archaic vocabulary to better facilitate search and analysis. Each book of the poem is saved as a text file _ch_01.txt_, _ch_02.txt_, and so on. Each txt file is accessed and saved to a dataframe with appropriate chapter titles associated with each text. Note that the dataframe is specified as "clean", as two dataframes will be made available; the raw dataframe will be the text without processing, but no further analysis will be conducted there.
 
@@ -174,5 +178,11 @@ pl_df_raw = pd.merge(pl_df_raw, lex_dens, left_index=True, right_index=True)
 pl_df_raw = pd.merge(pl_df_raw, lex_dens_norm, left_index=True, right_index=True)
 pl_df_raw.to_csv(r'pl_df_raw.csv')
 ```
+
+### Sentiment Data
+
+Now armed with the text in a dataframe, we may then prepare for sentiment analysis by accessing that dataframe and building on it. For the purposes of this project, only the cleaned text is considered.
+
+
 
 ## Visualization
