@@ -325,6 +325,7 @@ def freq_n(colm):
             print(Adj,file=f)
             print('\n',file=f)
 ```
+
 [('hell', 16), ('god', 14), ('power', 14), ('spirit', 12), ('heaven', 12), ('fire', 12), ('force', 12), ('hath', 11), ('strength', 10), ('seat', 9)]
 
 [('hell', 24), ('fire', 19), ('war', 18), ('heaven', 18), ('pain', 17), ('way', 17), ('power', 13), ('night', 13), ('place', 12), ('hand', 11)]
@@ -369,3 +370,7 @@ def cloud(text):
 ```
 
 A cursory inspection of the wordcloud can give hint as to the subject matter of the text.
+
+<p align="center"> 
+<img src="/assets/vis_data_cloud.jpg" alt="Wordcloud">
+</p>
