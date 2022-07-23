@@ -372,5 +372,5 @@ def cloud(text):
 A cursory inspection of the wordcloud can give hint as to the subject matter of the text.
 
 <p align="center"> 
-<img src="/assets/vis_data_cloud.jpg" alt="Wordcloud">
+<img src="/assets/vis_data_cloud.png" alt="Wordcloud">
 </p>
