@@ -374,3 +374,113 @@ A cursory inspection of the wordcloud can give hint as to the subject matter of 
 <p align="center"> 
 <img src="/assets/vis_data_cloud.png" alt="Wordcloud">
 </p>
+
+## n-gram (mono-,bi-,tri-gram)
+
+[n-grams](https://web.stanford.edu/~jurafsky/slp3/3.pdf) track the frquency in which (word) tokens appear. 1-grams (monograms) refer to the frequency in which single word tokens appear; 2-grams (bigrams) refer to the frequency in which two word tokens appear together; 3-grams (trigrams) refer to the frequency in which three word tokens appear together. Roughly, such frequencies will follow a [Zipf-like distribution](https://web.archive.org/web/20021010193014/http://linkage.rockefeller.edu/wli/zipf/).
+
+We loop through 1-, 2-, and 3-gram analyses for each book of the poem, and save the top fifteen of each n-grams saved as dataframes.
+
+```
+def n_gram(text):
+    
+    tot=' '.join(text)
+    
+    stringtot = tot.split(" ")
+    
+    gram = [1,2,3]
+    
+    save = []
+
+    for i in gram:
+        # look for top 15 used items
+        n_gram = (pd.Series(nltk.ngrams(stringtot, i)).value_counts())[:15]
+        # save as dataframe
+        n_gram_df=pd.DataFrame(n_gram)
+        n_gram_df = n_gram_df.reset_index()
+        # aquire index, word, count
+        n_gram_df = n_gram_df.rename(columns={"index": "word", 0: "count"})
+        # append data to save
+        save.append(n_gram_df)
+
+    sns.set()
+
+    fig, axes = plt.subplots(3)
+
+    plt.subplots_adjust(hspace = 0.7)
+
+    sns.barplot(data=save[0], x='count', y='word', ax=axes[0]).set(title="1-gram for total")
+    sns.barplot(data=save[1], x='count', y='word', ax=axes[1]).set(title="2-gram for total")
+    sns.barplot(data=save[2], x='count', y='word', ax=axes[2]).set(title="3-gram for total")
+
+    plt.savefig("vis_data_n_gram.png", dpi=300)
+    plt.show()
+```
+
+n-grams are useful in that they tell us exactly word distributions (once appropriately filtered). Word pairings are exceptionally useful in many contexts, not limited to sentiment. Reconstruction of broken or incomplete texts, for example, and auto-correct are applications of n-grams. 
+
+<p align="center"> 
+<img src="/assets/vis_data_n_gram.png" alt="n_gram">
+</p>
+
+## Average word length represented as probability density
+
+The average word length is represented by a _probability density_, the values of which may be greater than 1; the distribution itself, however, will integrate to 1. The values of the y-axis, then, are useful for relative comparisons between categories. Converting to a probability (in which the bar heights sum to 1) in the code is simply a matter of changing the argument stat='density' to stat='probability', which is essentially equivalent to finding the area under the curve for a specific interval. See [this article](https://towardsdatascience.com/histograms-and-density-plots-in-python-f6bda88f5ac0) for more details.
+
+```
+def leng(text):
+    f = plt.figure()
+
+    word = text.str.split().apply(lambda x : [len(i) for i in x])
+
+    sns.histplot(word.map(lambda x: np.mean(x)),stat='density',kde=True,color='blue')
+
+    plt.title("Average Word Length in Poem")
+    plt.xlabel("Average Word Length")
+    plt.ylabel("Probability Density")
+
+    plt.savefig("vis_data_leng.png", dpi=300)
+    plt.show()
+
+```
+
+Here, Milton is fairly consistent in his word-length for lexical words. While attempted to fit to a gaussian, the distribution is fairly flat, with an average of 5.51.
+
+<p align="center"> 
+<img src="/assets/vis_data_leng.png" alt="data_leng">
+</p>
+
+## Lexical density
+
+We now plot the lexical densities for each book of the poem. We plot both together.
+
+```
+def lex_dens():
+    patch1 = mpatches.Patch(color='r',label='Normalized: 2824 tokens')
+    patch2 = mpatches.Patch(color='b', label='Full token count')
+    all_handles = (patch1, patch2)
+
+    fig, ax = plt.subplots()
+
+    ax.set_alpha(0.7)
+
+    ax.barh(pl_df_clean['chapter'], pl_df_clean['lex_dens_norm'],color='r',alpha=.5)
+    ax.barh(pl_df_clean['chapter'], pl_df_clean['lex_dens'],color='b',alpha=.7)
+
+    ax.set_title("Lexical Density by Book")
+    ax.set_xlabel("Score")
+    ax.set_ylabel("Book")
+    ax.set_yticklabels(pl_df_clean.chapter, rotation=0)
+    ax.legend(handles=all_handles,loc='lower left')
+    ax.tick_params(axis='x', which='major')
+    ax.invert_yaxis()
+
+    plt.savefig("vis_data_dens.png", dpi=300)
+    plt.show()
+```
+
+Indeed, Milton is again fairly consistent, and has a relatively high inventory of lexical items. 
+
+<p align="center"> 
+<img src="/assets/vis_data_dens.png" alt="data_dens">
+</p>
