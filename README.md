@@ -260,7 +260,7 @@ The sentiment data and the textual data are then ready for visualization.
 pl_df_clean.to_csv(r'sent_df.csv')
 ```
 
-## Visualization
+## POS Frequencies
 
 Even with a modernized normalization of Milton's langauge, cataloging parts of speech such as nouns, verbs, and adjectives remains difficult. For superlative adjectives, for example, the model can confuse second person verbal inflection marker {-est) as the indicated for superlative adjectives. So while we may catalogue frequently occuring parts of speech, some error inevitably intrudes. 
 
@@ -327,8 +327,45 @@ def freq_n(colm):
 ```
 [('hell', 16), ('god', 14), ('power', 14), ('spirit', 12), ('heaven', 12), ('fire', 12), ('force', 12), ('hath', 11), ('strength', 10), ('seat', 9)]
 
-[('hell', 24), ('fire', 19), ('war', 18), ('heaven', 18), ('pain', 17), ('way', 17), ('thou', 15), ('power', 13), ('night', 13), ('place', 12)]
+[('hell', 24), ('fire', 19), ('war', 18), ('heaven', 18), ('pain', 17), ('way', 17), ('power', 13), ('night', 13), ('place', 12), ('hand', 11)]
 
-Not surprisingly, "hell" is the most represented nominal. Even glancing at these two lists, we can get a glimpse at the subject matter therein. Compare these two with the last chapter's nominals, in which the focus is far from Satan's new situation, and instead concerns the expulsion from Eden and what is yet to come.
+Not surprisingly, "hell" is the most represented nominal. Even glancing at these two lists, we can get a glimpse at the subject matter therein. Compare these two with the last two chapters' nominals, in which the focus is far from Satan's new situation, and instead concerns the expulsion from Eden and what is yet to come.
+
+[('man', 31), ('life', 23), ('death', 21), ('day', 17), ('god', 17), ('eye', 17), ('son', 16), ('till', 14), ('world', 13), ('way', 11)]
 
 [('god', 25), ('law', 21), ('son', 17), ('man', 15), ('nation', 15), ('death', 15), ('seed', 14), ('world', 13), ('life', 12), ('day', 12)]
+
+** Wordcloud representations
+
+Wordclouds are visualizations of (text) data in which the size of a word represents its frequency or importance in that data. Wordclouds are handy for visualization-at-a-glance, and have the enjoyable consequence of making a report more lively. 
+
+Generating wordclouds for each of poem's books follows from joining the text into a continuous string and defining the numerical limiter for how many words will be considered after sifting through stopwords. We plot accordingly
+
+```
+def cloud(text):
+
+    tot=' '.join(text)
+
+    wordcount = 150
+
+    sw = nltk.corpus.stopwords.words('english')
+    with open('clean_stop.txt','r') as f:
+        newStopWords = f.readlines()
+    sw.extend(newStopWords)
+    pers = ['thee','thou','thy']
+    sw.extend(pers)
+    
+    wordcloud = WordCloud(scale=3, background_color ='black', max_words=wordcount, stopwords=sw).generate(tot)
+
+    f = plt.figure()
+
+    plt.imshow(wordcloud,interpolation='bilinear')
+
+    plt.title('Wordcloud of Poem')
+    plt.axis('off')
+
+    plt.savefig("vis_data_cloud.png", dpi=300)
+    plt.show(block=True)
+```
+
+A cursory inspection of the wordcloud can give hint as to the subject matter of the text.
