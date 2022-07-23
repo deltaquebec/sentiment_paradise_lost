@@ -261,3 +261,74 @@ pl_df_clean.to_csv(r'sent_df.csv')
 ```
 
 ## Visualization
+
+Even with a modernized normalization of Milton's langauge, cataloging parts of speech such as nouns, verbs, and adjectives remains difficult. For superlative adjectives, for example, the model can confuse second person verbal inflection marker {-est) as the indicated for superlative adjectives. So while we may catalogue frequently occuring parts of speech, some error inevitably intrudes. 
+
+We define the frequency function and iterate over chapters, saving the data to .txt files.
+
+```
+# get the data
+pl_df_clean=pd.read_csv(r'pl_df_clean.csv')
+
+# stopwords
+sw = nltk.corpus.stopwords.words('english')
+with open('clean_stop.txt','r') as f:
+    newStopWords = f.readlines()
+sw.extend(newStopWords)
+
+def freq_n(colm):
+
+    # save cleaned chapters 
+    chapters = []
+    for i in range(12):
+        chapters.append(pl_df_clean.loc[i,colm])
+
+    # initialize lists for frequencies
+    nn_freq = []
+    vb_freq = []
+    jj_freq = []
+
+    # initialize text files
+    pos_freq = ["freq_noun.txt","freq_verb.txt","freq_adj.txt"]
+
+    for i in pos_freq:
+        with open(i, "w+") as f:
+            print("POS frequencies",file=f)
+
+    # get pos frequencies   
+    for i in chapters:
+        tokens = RegexpTokenizer(r'\w+').tokenize(i)
+        words = [k for k in tokens if k not in sw]
+        tagged = pos_tag(words)
+
+        # nouns
+        nouns = [k for k, pos in tagged if (pos == 'NN')]
+        Noun = FreqDist(nouns).most_common(10)
+        nn_freq.append(Noun)
+        with open("freq_noun.txt", "a+") as f:
+            print(Noun,file=f)
+            print('\n',file=f)
+
+        # verbs    
+        verbs = [k for k, pos in tagged if (pos == 'VB')]
+        Verb = FreqDist(verbs).most_common(10)
+        vb_freq.append(Verb)
+        with open("freq_verb.txt", "a+") as g:
+            print(Verb,file=g)
+            print('\n',file=g)
+
+        # adjectives       
+        adjs = [k for k, pos in tagged if (pos == 'JJ')]
+        Adj = FreqDist(adjs).most_common(10)
+        jj_freq.append(Adj)
+        with open("freq_adj.txt", "a+") as f:
+            print(Adj,file=f)
+            print('\n',file=f)
+```
+[('hell', 16), ('god', 14), ('power', 14), ('spirit', 12), ('heaven', 12), ('fire', 12), ('force', 12), ('hath', 11), ('strength', 10), ('seat', 9)]
+
+[('hell', 24), ('fire', 19), ('war', 18), ('heaven', 18), ('pain', 17), ('way', 17), ('thou', 15), ('power', 13), ('night', 13), ('place', 12)]
+
+Not surprisingly, "hell" is the most represented nominal. Even glancing at these two lists, we can get a glimpse at the subject matter therein. Compare these two with the last chapter's nominals, in which the focus is far from Satan's new situation, and instead concerns the expulsion from Eden and what is yet to come.
+
+[('god', 25), ('law', 21), ('son', 17), ('man', 15), ('nation', 15), ('death', 15), ('seed', 14), ('world', 13), ('life', 12), ('day', 12)]
