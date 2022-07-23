@@ -3,7 +3,7 @@
 <img src="/assets/dore_satan.jpg" alt="Satan by Dore">
 </p>
 
-The goal of this project is twofold: 1) **practice with data exploration and visualization 2) **classify sentiment** across various NLP sentiment analysis tools. The latter is achieved through [VADER](https://github.com/cjhutto/vaderSentiment), [TextBlob](https://textblob.readthedocs.io/en/dev/), and [NRC](https://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm). This project follows from the work of NBrisbon on [The Silmarillion](https://github.com/NBrisbon/Silmarillion-NLP), and so frequent comparison are made.
+The goal of this project is twofold: 1) **practice with data exploration and visualization 2) **classify sentiment** across various NLP sentiment analysis tools. The latter is achieved through [VADER](https://github.com/cjhutto/vaderSentiment), [TextBLOB](https://textblob.readthedocs.io/en/dev/), and [NRC](https://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm). This project follows from the work of NBrisbon on [The Silmarillion](https://github.com/NBrisbon/Silmarillion-NLP), and so frequent comparison are made.
 
 The project is arranged as follows:
 
@@ -181,8 +181,83 @@ pl_df_raw.to_csv(r'pl_df_raw.csv')
 
 ### Sentiment Data
 
-Now armed with the text in a dataframe, we may then prepare for sentiment analysis by accessing that dataframe and building on it. For the purposes of this project, only the cleaned text is considered.
+Now armed with the text in a dataframe, we may now prepare for sentiment analysis by accessing that dataframe and building on it. For the purposes of this project, only the cleaned text is considered. Three sentiment analysis models are considered: [VADER](https://github.com/cjhutto/vaderSentiment); [TextBLOB](https://textblob.readthedocs.io/en/dev/);  [NRC](https://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm).
 
+We begin with first invoking the dataframe.
 
+```
+pl_df_clean=pd.read_csv(r'pl_df_clean.csv')
+```
+
+VADER (Valence Aware Dictionary and sEntiment Reasoner) specifically examines sentiments expressed in social media, and is sensitive to **polarity** and **intensity**. We define the VADER analyzer, and apply it to the cleaned text using a lambda expression to delineate positive, negative, and neutral sentiment, as well as compound, which is a “normalized, weighted, composite score”.
+
+```
+analyzer = SentimentIntensityAnalyzer()
+
+pl_df_clean['vader'] = pl_df_clean['clean_text'].apply(lambda x: analyzer.polarity_scores(x))
+
+pl_df_clean = pd.concat([pl_df_clean.drop(['vader'], axis = 1), pl_df_clean['vader'].apply(pd.Series)], axis = 1)
+pl_df_clean['vader_eval'] = pl_df_clean['compound'].apply(lambda x: 'pos' if x >0 else 'neg' if x <0 else 'neu')
+```
+
+TextBLOB "is a Python library for processing textual data and helps with tasks such as part-of-speech tagging, noun phrase extraction, sentiment analysis, and more". Here, we measure a text for its **polarity** (the extent to which sentiment is positive or negative on a [-1,+1] scale) and **subjectivity** (measured on a [0,+1] scale in which 0 refers to an objective statement and 1 refers to a subjective statement; subjectivity refers to personal opinions, emotions, or judgments, while objectivity refers to factual information).
+
+We define a list to contain sentences bassed into the model, and save lists for polarity and subjectivity.
+
+```
+blobs = []
+
+for i in range(12):
+    blobs.append(TextBlob(pl_df_clean.loc[i,'clean_text']))
+
+blob_polr = []
+blob_subj = []
+```
+
+We iterate over each blobbed text and get polarity and subjectivity scores therein. We pass those measurements into the dataframe.
+
+```
+for i in blobs:
+    sent = i.sentences
+    for j in sent:
+        polr = j.sentiment.polarity
+        subj = j.sentiment.subjectivity
+    blob_polr.append(polr)
+    blob_subj.append(subj)
+    
+polr_df = pd.DataFrame(blob_polr)  
+subj_df = pd.DataFrame(blob_subj)  
+blob_sent = pd.merge(polr_df, subj_df, left_index=True, right_index=True)
+
+blob_sent = blob_sent.rename(columns={'0_x': "polarity", '0_y': 'subjectivity'})
+pl_df_clean = pd.merge(pl_df_clean, blob_sent, left_index=True, right_index=True)
+```
+
+NRC measures English words and their associations with eight basic emotions and two sentiments, which combine to yield more complex human emotions. This follows from the work of psychologist and professor [Robert Plutchik](https://en.wikipedia.org/wiki/Robert_Plutchik). The ten attributes are:
+
+- anger
+- fear
+- anticipation
+- trust
+- surprise
+- sadness
+- joy
+- disgust
+- positive
+- negative
+
+We apply the NRC model to the clean text and save the data as a dataframe.
+
+```
+pl_df_clean['emotions'] = pl_df_clean['clean_text'].apply(lambda x: NRCLex(x).affect_frequencies)
+
+pl_df_clean = pd.concat([pl_df_clean.drop(['emotions'], axis = 1), pl_df_clean['emotions'].apply(pd.Series)], axis = 1)
+```
+
+The sentiment data and the textual data are then ready for visualization.
+
+```
+pl_df_clean.to_csv(r'sent_df.csv')
+```
 
 ## Visualization
