@@ -470,4 +470,15 @@ Indeed, Milton is again fairly consistent, and has a relatively high inventory o
 
 # 2. Sentiment Analysis
 
-The sentiment analysis plots are calculated in _visualization.py_ from the sentiment dataframe.
+The sentiment analysis plots are calculated in _visualization.py_ from the sentiment dataframe. The average aggregate values are printed to the text file _results_pl_sent.txt_.
+
+## VADER
+
+|  | | **neg** | | **neu** | | **pos** | | **compound** |
+|:------------------|:------------------|:------------------|:------------------|:------------------|:------------------|:------------------|:------------------|:------------------|
+| **mean**   | | 0.16 | | 0.58 | | 0.26 | | 0.67 | 
+| **std**   | | 0.06 | | 0.04 | | 0.05 | | 0.78 | 
+| **min**  | | 0.07 | | 0.52 | | 0.20 | | -1.00 | 
+| **max**  | | 0.26 | | 0.65 | | 0.33 | | 1.00 | 
+
+
