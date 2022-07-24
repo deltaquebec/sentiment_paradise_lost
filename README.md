@@ -491,7 +491,7 @@ The trending of positive (pos) and negative (neg) scores mirror each other, but 
 
 ## TextBLOB
 
-We see from the results below that the Subjectivity score is not only significnaly higher than the polarity score, but is also much more consistent. Interestingly, TextBLOB extrema points tend to correlate with intersection points described above in the VADER analysis, in which local minima of polarity scores in TextBLOB correlate with increasing negative scores and decreasing positivy scores in VADER, and vise versa. The consistency and high scores for the Subjectivity metric indicate a more personal narrative rather than an objective account. 
+We see from the results below that the Subjectivity score is not only significnaly higher than the polarity score, but is also much more consistent. Interestingly, TextBLOB extrema points tend to correlate with intersection points described above in the VADER analysis, in which minima of polarity scores in TextBLOB correlate with increasing negative scores and decreasing positivy scores in VADER, and vise versa. The consistency and high scores for the Subjectivity metric indicate a more personal narrative rather than an objective account. 
 
 | | | **polarity** | | **subjectivity** | 
 |:--------|:--------|:--------|:--------|:--------|
@@ -516,3 +516,9 @@ Plutchik describes the attributes in diametric pairs, and so we plot them accord
 | **std**   | | 0.03 | | 0.02 | | 0.02 | | 0.03 | | 0.01 | | 0.04 | | 0.03 | | 0.02 | | 0.01 | | 0.02 |
 | **min**  | | 0.06 | | 0.04 | | 0.07 | | 0.08 | | 0.03 | | 0.13 | | 0.09 | | 0.04 | | 0.02 | | 0.06 |
 | **max**  | | 0.15 | | 0.10 | | 0.12 | | 0.17 | | 0.05 | | 0.27 | | 0.19 | | 0.11 | | 0.08 | | 0.13 |
+
+Overall sentiment matches with the sentiment reported in the VADER analysis, and again matches the extrema points in the TextBLOB analysis. 
+
+<p align="center"> 
+<img src="/assets/vis_sent_nrc.png" alt="sent_nrc">
+</p>
