@@ -474,6 +474,10 @@ The sentiment analysis plots are calculated in _visualization.py_ from the senti
 
 ## VADER
 
+The results of the VADER analysis are given below. The Neutral sentiment (neu) scores higher abouve the other sentiments consistently across all books of the poem. Here we face an interesting interpretation of results. Indeed, this may follow from Milton's style, which is certainly a formal register, or it may be a limitation of the analytical application, given that the language of _Paradise Lost_ is not the intended target for VADER (this is a recurring theme, in that the deliberately archaic style of the work is quite dissimilar to the styles the sentiment analysis tools are trained on).
+
+The trending of positive (pos) and negative (neg) scores mirror each other, but near intersection points (Books I to III, Book VI, Books IX to XI) represent points in the poem worth mentioning. Books I to III narrate Satan's new situation after having been expelled from heaven, his resolve to claim the exile and rallying of fallen angels to their new station, and God and the Son of God observing and conversing about Satan's actions. Book VI narrates the triumph of heaven over the rebellious angels, and Books IX to XI essentially follow the Eden story with an optimistic conclusion.
+
 |  | | **neg** | | **neu** | | **pos** | | **compound** |
 |:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|
 | **mean**   | | 0.16 | | 0.58 | | 0.26 | | 0.67 | 
@@ -481,4 +485,6 @@ The sentiment analysis plots are calculated in _visualization.py_ from the senti
 | **min**  | | 0.07 | | 0.52 | | 0.20 | | -1.00 | 
 | **max**  | | 0.26 | | 0.65 | | 0.33 | | 1.00 | 
 
-
+<p align="center"> 
+<img src="/assets/vis_sent_vader.png" alt="sent_vader">
+</p>
