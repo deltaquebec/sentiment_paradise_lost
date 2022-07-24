@@ -7,7 +7,7 @@ The goal of this project is twofold: 1) **practice with data exploration and vis
 
 The project is arranged as follows:
 
-1. **Visualization**
+1. **Data and Lexical Information**
 - Data preparation and data cleaning
 - POS frequencies
 - Wordcloud representations
@@ -21,9 +21,9 @@ The project is arranged as follows:
 
 It should be noted that this project was conducted using the [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit). To optimize completion time, each task was invited to perform on the GPU: NVIDIA GeFORCE RTX 3070. Preliminary tests were done on the CPU: AMD Ryzen 7 3700X 8-Core Processor 3.59 GHz. Your completion times may be different according to the processing unit you use.
 
-# 1. Visualization
+# 1. Data and Lexical Information
 
-The tasks of data visualization are contained in _visualization_data.py_ and _visualization_sent.py_. The plots of distributions are saved as .png files.
+The tasks of data formatting and lexical analysis are contained in _dataframe_data.py_ and _dataframe_sent.py_. Visualization of the lexical information is completed in _visualization_data.py_. The plots of distributions are saved as .png files.
 
 ## Data preparation and data cleaning
 
@@ -468,4 +468,6 @@ Indeed, Milton is again fairly consistent, and has a relatively high inventory o
 <img src="/assets/vis_data_dens.png" alt="data_dens">
 </p>
 
-# 1. Sentiment Analysis
+# 2. Sentiment Analysis
+
+The sentiment analysis plots are calculated in _visualization.py_ from the sentiment dataframe.
