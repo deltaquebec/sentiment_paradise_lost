@@ -488,3 +488,18 @@ The trending of positive (pos) and negative (neg) scores mirror each other, but 
 <p align="center"> 
 <img src="/assets/vis_sent_vader.png" alt="sent_vader">
 </p>
+
+## TextBLOB
+
+We see from the results below that the Subjectivity score is not only significnaly higher than the polarity score, but is also much more consistent. Interestingly, TextBLOB extrema points tend to correlate with intersection points described above in the VADER analysis. Comparisons and applications of the two analyses have been featured in various investigations, including two direct comarisons ([here](https://www.analyticsvidhya.com/blog/2021/10/sentiment-analysis-with-textblob-and-vader/) and [here](https://towardsdatascience.com/sentiment-analysis-vader-or-textblob-ff25514ac540)), as well as a sentiment analysis of [The Silmarillion](https://github.com/NBrisbon/Silmarillion-NLP). The consistency and high scores for the Subjectivity metric indicate a more personal narrative rather than an objective account. 
+
+|  | | **polarity** | | **subjectivity** | 
+|:--------|:--------|:--------|:--------|:--------|
+| **mean**   | | 0.14 | | 0.53 |
+| **std**   | | 0.06 | | 0.01 | 
+| **min**  | | 0.05 | | 0.51 |
+| **max**  | | 0.23 | | 0.55 | 
+
+<p align="center"> 
+<img src="/assets/vis_sent_blob.png" alt="sent_blob">
+</p>
