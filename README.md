@@ -517,8 +517,12 @@ Plutchik describes the attributes in diametric pairs, and so we plot them accord
 | **min**  | | 0.06 | | 0.04 | | 0.07 | | 0.08 | | 0.03 | | 0.13 | | 0.09 | | 0.04 | | 0.02 | | 0.06 |
 | **max**  | | 0.15 | | 0.10 | | 0.12 | | 0.17 | | 0.05 | | 0.27 | | 0.19 | | 0.11 | | 0.08 | | 0.13 |
 
-Overall sentiment matches with the sentiment reported in the VADER analysis, and again matches the extrema points in the TextBLOB analysis. 
+Overall sentiment matches with the sentiment reported in the VADER analysis, and again matches the extrema points in the TextBLOB analysis. The graphs of diametric emotions are not given here, but are in the assets folder of this project.
 
 <p align="center"> 
 <img src="/assets/vis_sent_nrc.png" alt="sent_nrc">
 </p>
+
+## Conclusion
+
+Across each sentiment analysis, we see a general trend towards positivity scores. Indeed, this is congruent with the overall optimistic conclusion of the work; even though mankind is banished from Eden, they do so having been promised of redemption. Emotional extrema in the poem correlate. Polarity extrema in TextBLOB relate as crossover points in VADER and NRC for positivity and negativity metrics, and do so such that minima of polarity scores in TextBLOB correlate with increasing negative scores and decreasing positivy scores in VADER and NRC, and vise versa. These emotional points in the narrative occur at the regions of Books I to III, Book VI, and Books IX to XI.
