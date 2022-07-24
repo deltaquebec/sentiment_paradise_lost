@@ -508,9 +508,11 @@ Comparisons and applications of the two analyses have been featured in various i
 
 ## NRC
 
-|  | | **fear** | | **anger** | | **anticipation** | | **surprise** | | **positive** | | **negative** | | **sadness** | | **disgust** | | **joy**|
-|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|
-| **mean**   | | 0.16 | | 0.58 | | 0.26 | | 0.67 | | 0.16 | | 0.58 | | 0.26 | | 0.67 |
-| **std**   | | 0.06 | | 0.04 | | 0.05 | | 0.78 | | 0.06 | | 0.04 | | 0.05 | | 0.78 |
-| **min**  | | 0.07 | | 0.52 | | 0.20 | | -1.00 | | 0.06 | | 0.04 | | 0.05 | | 0.78 |
-| **max**  | | 0.26 | | 0.65 | | 0.33 | | 1.00 | | 0.06 | | 0.04 | | 0.05 | | 0.78 |
+Plutchik describes the attributes in diametric pairs, and so we plot them accordingly in addition to overall postive and negative groups (that is, we consider the positive group (anticipation, joy, surprise, and trust) relative the negative group (anger, disgust, fear, and sadness)). The NRC scores indicate that the poem tends towards a higher overall positive score, where the stringest emotions are: trust; fear; anticipation; joy. The lowest scores are: surprise; disgust; anger; sadness.
+
+|  | | **fear** | | **anger** | | **anticipation** | | **surprise** | | **trust** | | **surprise** | | **positive** | | **negative** | | **sadness** | | **disgust** | | **joy**|
+|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|
+| **mean**   | | 0.11 | | 0.07 | | 0.10 | | 0.12 | | 0.04 | | 0.20 | | 0.15 | | 0.07 | | 0.05 | | 0.09 |
+| **std**   | | 0.03 | | 0.02 | | 0.02 | | 0.03 | | 0.01 | | 0.04 | | 0.03 | | 0.02 | | 0.01 | | 0.02 |
+| **min**  | | 0.06 | | 0.04 | | 0.07 | | 0.08 | | 0.03 | | 0.13 | | 0.09 | | 0.04 | | 0.02 | | 0.06 |
+| **max**  | | 0.15 | | 0.10 | | 0.12 | | 0.17 | | 0.05 | | 0.27 | | 0.19 | | 0.11 | | 0.08 | | 0.13 |
