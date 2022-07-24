@@ -64,17 +64,17 @@ Milton's English is itself an exploration of th epoet's unique mastery of langua
 This has the interesting problem of how to clean the data for analysis. For this project, we clean the data according to English stopwords complemented with an additional series of stopwords with older English archaisms in _clean_stop.txt_. While not present in Milton's work, contractions are mapped to their periphrasis for good measure in _clean_map.txt_. The cleaning algorithm follows closely from [this work](https://github.com/072arushi/Movie_review_analysis). The cleaned text is saved to the dataframe.
 
 ```
-# stopwords
 sw = nltk.corpus.stopwords.words('english')
 with open('clean_stop.txt','r') as f:
     newStopWords = f.readlines()
 sw.extend(newStopWords)
+pers = ['thee','thou','thy','thee','hast','u\'','thus',
+            'shall','though','art','seest','knowest','shalt']
+sw.extend(pers)
 
-# contractions
 with open('clean_map.txt','r') as f:
     mapping = f.readlines()
 
-# clean
 punct = string.punctuation
 def remove_punctuation(text):
     return text.translate(str.maketrans('', '', punct))
@@ -267,41 +267,29 @@ Even with a modernized normalization of Milton's langauge, cataloging parts of s
 We define the frequency function and iterate over chapters, saving the data to .txt files.
 
 ```
-# get the data
 pl_df_clean=pd.read_csv(r'pl_df_clean.csv')
-
-# stopwords
-sw = nltk.corpus.stopwords.words('english')
-with open('clean_stop.txt','r') as f:
-    newStopWords = f.readlines()
-sw.extend(newStopWords)
 
 def freq_n(colm):
 
-    # save cleaned chapters 
     chapters = []
     for i in range(12):
         chapters.append(pl_df_clean.loc[i,colm])
 
-    # initialize lists for frequencies
     nn_freq = []
     vb_freq = []
     jj_freq = []
 
-    # initialize text files
     pos_freq = ["freq_noun.txt","freq_verb.txt","freq_adj.txt"]
 
     for i in pos_freq:
         with open(i, "w+") as f:
             print("POS frequencies",file=f)
 
-    # get pos frequencies   
     for i in chapters:
         tokens = RegexpTokenizer(r'\w+').tokenize(i)
-        words = [k for k in tokens if k not in sw]
+        words = [k for k in tokens]
         tagged = pos_tag(words)
 
-        # nouns
         nouns = [k for k, pos in tagged if (pos == 'NN')]
         Noun = FreqDist(nouns).most_common(10)
         nn_freq.append(Noun)
@@ -309,15 +297,13 @@ def freq_n(colm):
             print(Noun,file=f)
             print('\n',file=f)
 
-        # verbs    
         verbs = [k for k, pos in tagged if (pos == 'VB')]
         Verb = FreqDist(verbs).most_common(10)
         vb_freq.append(Verb)
-        with open("freq_verb.txt", "a+") as g:
-            print(Verb,file=g)
-            print('\n',file=g)
-
-        # adjectives       
+        with open("freq_verb.txt", "a+") as f:
+            print(Verb,file=f)
+            print('\n',file=f)
+            
         adjs = [k for k, pos in tagged if (pos == 'JJ')]
         Adj = FreqDist(adjs).most_common(10)
         jj_freq.append(Adj)
@@ -325,16 +311,13 @@ def freq_n(colm):
             print(Adj,file=f)
             print('\n',file=f)
 ```
-
 [('hell', 16), ('god', 14), ('power', 14), ('spirit', 12), ('heaven', 12), ('fire', 12), ('force', 12), ('hath', 11), ('strength', 10), ('seat', 9)]
-
 [('hell', 24), ('fire', 19), ('war', 18), ('heaven', 18), ('pain', 17), ('way', 17), ('power', 13), ('night', 13), ('place', 12), ('hand', 11)]
 
 Not surprisingly, "hell" is the most represented nominal. Even glancing at these two lists, we can get a glimpse at the subject matter therein. Compare these two with the last two chapters' nominals, in which the focus is far from Satan's new situation, and instead concerns the expulsion from Eden and what is yet to come.
 
-[('man', 31), ('life', 23), ('death', 21), ('day', 17), ('god', 17), ('eye', 17), ('son', 16), ('till', 14), ('world', 13), ('way', 11)]
-
-[('god', 25), ('law', 21), ('son', 17), ('man', 15), ('nation', 15), ('death', 15), ('seed', 14), ('world', 13), ('life', 12), ('day', 12)]
+[('man', 31), ('life', 23), ('death', 21), ('day', 17), ('god', 17), ('eye', 17), ('son', 16), ('till', 15), ('earth', 13), ('world', 13)]
+[('god', 26), ('law', 21), ('son', 17), ('man', 15), ('nation', 15), ('death', 15), ('seed', 14), ('world', 13), ('life', 12), ('day', 12)]
 
 ** Wordcloud representations
 
@@ -444,7 +427,7 @@ def leng(text):
 
 ```
 
-Here, Milton is fairly consistent in his word-length for lexical words. While attempted to fit to a gaussian, the distribution is fairly flat, with an average of 5.51.
+Here, Milton is fairly consistent in his word-length for lexical words. While attempted to fit to a gaussian, the distribution follows with an average of 5.57.
 
 <p align="center"> 
 <img src="/assets/vis_data_leng.png" alt="data_leng">
@@ -479,8 +462,10 @@ def lex_dens():
     plt.show()
 ```
 
-Indeed, Milton is again fairly consistent, and has a relatively high inventory of lexical items. 
+Indeed, Milton is again fairly consistent, and has a relatively high inventory of lexical items. The normalized data show that Milton's choice of lexical content is consistent across books of the poem. 
 
 <p align="center"> 
 <img src="/assets/vis_data_dens.png" alt="data_dens">
 </p>
+
+# 1. Sentiment Analysis
