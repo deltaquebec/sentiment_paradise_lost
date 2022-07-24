@@ -478,7 +478,7 @@ The results of the VADER analysis are given below. The Neutral sentiment (neu) s
 
 The trending of positive (pos) and negative (neg) scores mirror each other, but near intersection points (Books I to III, Book VI, Books IX to XI) represent points in the poem worth mentioning. Books I to III narrate Satan's new situation after having been expelled from heaven, his resolve to claim the exile and rallying of fallen angels to their new station, and God and the Son of God observing and conversing about Satan's actions. Book VI narrates the triumph of heaven over the rebellious angels, and Books IX to XI essentially follow the Eden story with an optimistic conclusion.
 
-|  | | **neg** | | **neu** | | **pos** | | **compound** |
+| | | **neg** | | **neu** | | **pos** | | **compound** |
 |:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|
 | **mean**   | | 0.16 | | 0.58 | | 0.26 | | 0.67 | 
 | **std**   | | 0.06 | | 0.04 | | 0.05 | | 0.78 | 
@@ -493,7 +493,7 @@ The trending of positive (pos) and negative (neg) scores mirror each other, but 
 
 We see from the results below that the Subjectivity score is not only significnaly higher than the polarity score, but is also much more consistent. Interestingly, TextBLOB extrema points tend to correlate with intersection points described above in the VADER analysis, in which local minima of polarity scores in TextBLOB correlate with increasing negative scores and decreasing positivy scores in VADER, and vise versa. The consistency and high scores for the Subjectivity metric indicate a more personal narrative rather than an objective account. 
 
-|  | | **polarity** | | **subjectivity** | 
+| | | **polarity** | | **subjectivity** | 
 |:--------|:--------|:--------|:--------|:--------|
 | **mean**   | | 0.14 | | 0.53 |
 | **std**   | | 0.06 | | 0.01 | 
@@ -510,8 +510,8 @@ Comparisons and applications of the two analyses have been featured in various i
 
 Plutchik describes the attributes in diametric pairs, and so we plot them accordingly in addition to overall postive and negative groups (that is, we consider the positive group (anticipation, joy, surprise, and trust) relative the negative group (anger, disgust, fear, and sadness)). The NRC scores indicate that the poem tends towards a higher overall positive score, where the stringest emotions are: trust; fear; anticipation; joy. The lowest scores are: surprise; disgust; anger; sadness.
 
-|  | | **fear** | | **anger** | | **anticipation** | | **trust** | | **surprise** | | **positive** | | **negative** | | **sadness** | | **disgust** | | **joy**|
-|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|
+| | | **fear** | | **anger** | | **anticipation** | | **trust** | | **surprise** | | **positive** | | **negative** | | **sadness** | | **disgust** | | **joy** |
+|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|
 | **mean**   | | 0.11 | | 0.07 | | 0.10 | | 0.12 | | 0.04 | | 0.20 | | 0.15 | | 0.07 | | 0.05 | | 0.09 |
 | **std**   | | 0.03 | | 0.02 | | 0.02 | | 0.03 | | 0.01 | | 0.04 | | 0.03 | | 0.02 | | 0.01 | | 0.02 |
 | **min**  | | 0.06 | | 0.04 | | 0.07 | | 0.08 | | 0.03 | | 0.13 | | 0.09 | | 0.04 | | 0.02 | | 0.06 |
