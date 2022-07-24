@@ -470,7 +470,7 @@ Indeed, Milton is again fairly consistent, and has a relatively high inventory o
 
 # 2. Sentiment Analysis
 
-The sentiment analysis plots are calculated in _visualization.py_ from the sentiment dataframe. The average aggregate values are printed to the text file _results_pl_sent.txt_.
+The sentiment analysis plots are calculated in _visualization.py_ from the sentiment dataframe. The average aggregate values are printed to the text file _results_pl_sent.txt_. Much of the code for plotting sentiment is redundant, and so are not reported below.
 
 ## VADER
 
@@ -491,7 +491,7 @@ The trending of positive (pos) and negative (neg) scores mirror each other, but 
 
 ## TextBLOB
 
-We see from the results below that the Subjectivity score is not only significnaly higher than the polarity score, but is also much more consistent. Interestingly, TextBLOB extrema points tend to correlate with intersection points described above in the VADER analysis. Comparisons and applications of the two analyses have been featured in various investigations, including two direct comarisons ([here](https://www.analyticsvidhya.com/blog/2021/10/sentiment-analysis-with-textblob-and-vader/) and [here](https://towardsdatascience.com/sentiment-analysis-vader-or-textblob-ff25514ac540)), as well as a sentiment analysis of [The Silmarillion](https://github.com/NBrisbon/Silmarillion-NLP). The consistency and high scores for the Subjectivity metric indicate a more personal narrative rather than an objective account. 
+We see from the results below that the Subjectivity score is not only significnaly higher than the polarity score, but is also much more consistent. Interestingly, TextBLOB extrema points tend to correlate with intersection points described above in the VADER analysis, in which local minima of polarity scores in TextBLOB correlate with increasing negative scores and decreasing positivy scores in VADER, and vise versa. The consistency and high scores for the Subjectivity metric indicate a more personal narrative rather than an objective account. 
 
 |  | | **polarity** | | **subjectivity** | 
 |:--------|:--------|:--------|:--------|:--------|
@@ -503,3 +503,14 @@ We see from the results below that the Subjectivity score is not only significna
 <p align="center"> 
 <img src="/assets/vis_sent_blob.png" alt="sent_blob">
 </p>
+
+Comparisons and applications of the two analyses have been featured in various investigations, including two direct comarisons ([here](https://www.analyticsvidhya.com/blog/2021/10/sentiment-analysis-with-textblob-and-vader/) and [here](https://towardsdatascience.com/sentiment-analysis-vader-or-textblob-ff25514ac540)), as well as a sentiment analysis of [The Silmarillion](https://github.com/NBrisbon/Silmarillion-NLP). 
+
+## NRC
+
+|  | | **fear** | | **anger** | | **anticipation** | | **surprise** | | **positive** | | **negative** | | **sadness** | | **disgust** | | **joy**|
+|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|
+| **mean**   | | 0.16 | | 0.58 | | 0.26 | | 0.67 | | 0.16 | | 0.58 | | 0.26 | | 0.67 |
+| **std**   | | 0.06 | | 0.04 | | 0.05 | | 0.78 | | 0.06 | | 0.04 | | 0.05 | | 0.78 |
+| **min**  | | 0.07 | | 0.52 | | 0.20 | | -1.00 | | 0.06 | | 0.04 | | 0.05 | | 0.78 |
+| **max**  | | 0.26 | | 0.65 | | 0.33 | | 1.00 | | 0.06 | | 0.04 | | 0.05 | | 0.78 |
