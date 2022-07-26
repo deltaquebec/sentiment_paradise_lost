@@ -14,7 +14,7 @@ _The mind is its own place, and in itself_
 
 _Can make a Heaven of Hell, a Hell of Heaven."_
 
-Book 1, Line 249-255
+Book 1, Lines 249-255
 
 <p align="center"> 
 <img src="/assets/dore_satan.jpg" alt="Satan by Dore">
