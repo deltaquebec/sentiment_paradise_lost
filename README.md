@@ -1,4 +1,14 @@
 # Data Visualization and Sentiment Analysis of "*Paradise Lost*" by John Milton
+
+_"Farewell happy fields
+Where joy for ever dwells: Hail horrors, hail
+Infernal world, and thou profoundest Hell
+Receive thy new possessor: One who brings
+A mind not to be changed by place or time.
+The mind is its own place, and in itself
+Can make a Heaven of Hell, a Hell of Heaven."_
+Book 1, Line 249-255
+
 <p align="center"> 
 <img src="/assets/dore_satan.jpg" alt="Satan by Dore">
 </p>
