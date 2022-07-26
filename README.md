@@ -1,18 +1,18 @@
 # Data Visualization and Sentiment Analysis of "*Paradise Lost*" by John Milton
 
-_"Farewell happy fields
+_"Farewell happy fields_
 
-Where joy for ever dwells: Hail horrors, hail
+_Where joy for ever dwells: Hail horrors, hail_
 
-Infernal world, and thou profoundest Hell
+_Infernal world, and thou profoundest Hell_
 
-Receive thy new possessor: One who brings
+_Receive thy new possessor: One who brings_
 
-A mind not to be changed by place or time.
+_A mind not to be changed by place or time._
 
-The mind is its own place, and in itself
+_The mind is its own place, and in itself_
 
-Can make a Heaven of Hell, a Hell of Heaven."_
+_Can make a Heaven of Hell, a Hell of Heaven."_
 
 Book 1, Line 249-255
 
