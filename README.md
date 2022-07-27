@@ -444,7 +444,7 @@ def leng(text):
 
 ```
 
-Here, Milton is fairly consistent in his word-length for lexical words. While attempted to fit to a gaussian, the distribution follows with an average of 5.57.
+Here, Milton is fairly consistent in his word-length for lexical words. While attempted to fit to a gaussian, the distribution follows with an average of 5.57 (SD = 0.06).
 
 <p align="center"> 
 <img src="/assets/vis_data_leng.png" alt="data_leng">
@@ -479,7 +479,7 @@ def lex_dens():
     plt.show()
 ```
 
-Indeed, Milton is again fairly consistent, and has a relatively high inventory of lexical items. The normalized data show that Milton's choice of lexical content is consistent across books of the poem. 
+Indeed, Milton is again fairly consistent, and has a relatively high inventory of lexical items. The range of scores is [0, 1]; higher scores indicate higher lexical density. The average across all books is 0.51 (SD = 0.03) with (min,max) = (0.45,0.57), and the average across all books for the normalized data is 0.56 (SD = 0.02) with (min,max) = (0.53,0.59). Written forms of human communication in the English language typically have lexical densities above 0.40, while spoken forms tend to have lexical densities below 0.40 (Castello 2008). In a survey of historical texts by Michael Stubbs (1996), the typical lexical density of fictional literature ranged between 0.40 and 0.54, while non-fiction ranged between 0.40 and 0.65.
 
 <p align="center"> 
 <img src="/assets/vis_data_dens.png" alt="data_dens">
