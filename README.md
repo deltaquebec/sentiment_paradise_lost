@@ -491,7 +491,7 @@ The sentiment analysis plots are calculated in _visualization.py_ from the senti
 
 ## VADER
 
-The results of the VADER analysis are given below. The Neutral sentiment (neu) scores higher abouve the other sentiments consistently across all books of the poem. Here we face an interesting interpretation of results. Indeed, this may follow from Milton's style, which is certainly a formal register, or it may be a limitation of the analytical application, given that the language of _Paradise Lost_ is not the intended target for VADER (this is a recurring theme, in that the deliberately archaic style of the work is quite dissimilar to the styles the sentiment analysis tools are trained on).
+The results of the VADER analysis are given below. The Neutral sentiment (neu) scores higher above the other sentiments consistently across all books of the poem. Here we face an interesting interpretation of results. Indeed, this may follow from Milton's style, which is certainly a formal register, or it may be a limitation of the analytical application, given that the language of _Paradise Lost_ is not the intended target for VADER (this is a recurring theme, in that the deliberately archaic style of the work is quite dissimilar to the styles the sentiment analysis tools are trained on).
 
 The trending of positive (pos) and negative (neg) scores mirror each other, While the compound score oscillates between extreme values of -1 and +1. Intersection points between positive and negative scores (Books I to III, Book VI, Books IX to XI) represent regions in the poem worth mentioning. Books I to III narrate Satan's new situation after having been expelled from heaven, his resolve to claim the exile and rallying of fallen angels to their new station, and God and the Son of God observing and conversing about Satan's actions. Book VI narrates the triumph of heaven over the rebellious angels, and Books IX to XI essentially follow the Eden story with an optimistic conclusion.
 
@@ -525,7 +525,7 @@ Comparisons and applications of the two analyses have been featured in various i
 
 ## NRC
 
-Plutchik describes the attributes in diametric pairs, and so we plot them accordingly in addition to overall postive and negative groups (that is, we consider the positive group (anticipation, joy, surprise, and trust) relative the negative group (anger, disgust, fear, and sadness)). The NRC scores indicate that the poem tends towards a higher overall positive score, where the stringest emotions are: trust; fear; anticipation; joy. The lowest scores are: surprise; disgust; anger; sadness.
+Plutchik describes the attributes in diametric pairs, and so we plot them accordingly in addition to overall postive and negative groups (that is, we consider the positive group (anticipation, joy, surprise, and trust) relative the negative group (anger, disgust, fear, and sadness)). The NRC scores indicate that the poem tends towards a higher overall positive score, where the strongest emotions are: trust; fear; anticipation; joy. The lowest scores are: surprise; disgust; anger; sadness.
 
 | | | **fear** | | **anger** | | **anticipation** | | **trust** | | **surprise** | | **positive** | | **negative** | | **sadness** | | **disgust** | | **joy** |
 |:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|:--------|
